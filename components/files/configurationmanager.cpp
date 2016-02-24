@@ -14,12 +14,12 @@
 namespace Files
 {
 
-static const char* const openmwCfgFile = "openmw.cfg";
+static const char* const openmwCfgFile = "openoht.cfg";
 
 #if defined(_WIN32) || defined(__WINDOWS__)
-static const char* const applicationName = "OpenMW";
+static const char* const applicationName = "OpenOht";
 #else
-static const char* const applicationName = "openmw";
+static const char* const applicationName = "openoht";
 #endif
 
 const char* const mwToken = "?mw?";
