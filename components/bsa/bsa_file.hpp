@@ -51,8 +51,10 @@ public:
         // (which is what is stored in the archive.)
         uint32_t fileSize, offset;
 
+		bool compressed;
+
         // Zero-terminated file name
-        const char *name;
+        std::string name;
     };
     typedef std::vector<FileStruct> FileList;
 
@@ -130,6 +132,9 @@ public:
     /// @note Thread safe.
     const FileList &getList() const
     { return files; }
+
+	//Generate hash of file or folder
+	unsigned long long genHash(const char *sPath, bool isFolder);
 };
 
 }
