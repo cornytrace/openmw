@@ -26,9 +26,14 @@
 #include "bsa_file.hpp"
 
 #include <stdexcept>
+#include <string>
 
 #include <boost/filesystem/path.hpp>
 #include <boost/filesystem/fstream.hpp>
+#include <boost/iostreams/filtering_streambuf.hpp>
+#include <boost/iostreams/filtering_stream.hpp>
+#include <boost/iostreams/filter/gzip.hpp>
+#include <boost/iostreams/copy.hpp>
 
 using namespace std;
 using namespace Bsa;
@@ -229,8 +234,18 @@ Files::IStreamPtr BSAFile::getFile(const char *file)
         fail("File not found: " + string(file));
 
     const FileStruct &fs = files[i];
+	auto filestream = Files::openConstrainedFileStream (filename.c_str (), fs.offset, fs.fileSize);
 
-    return Files::openConstrainedFileStream (filename.c_str (), fs.offset, fs.fileSize);
+	if (fs.compressed)
+	{
+		boost::iostreams::filtering_istreambuf buf;
+		buf.push(boost::iostreams::zlib_decompressor());
+		buf.push(*filestream);
+		Files::IStreamPtr out(new std::istream(&buf));
+		return out;
+	}
+	
+	return filestream;
 }
 
 Files::IStreamPtr BSAFile::getFile(const FileStruct *file)
