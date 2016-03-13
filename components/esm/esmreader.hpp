@@ -14,7 +14,7 @@
 #include <components/to_utf8/to_utf8.hpp>
 
 #include "esmcommon.hpp"
-#include "loadtes3.hpp"
+#include "loadtes4.hpp"
 
 namespace ESM {
 

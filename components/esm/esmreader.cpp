@@ -78,8 +78,8 @@ void ESMReader::open(Files::IStreamPtr _esm, const std::string &name)
 {
     openRaw(_esm, name);
 
-    if (getRecName() != "TES3")
-        fail("Not a valid Morrowind file");
+	if (getRecName() != "TES4")
+	    fail("Not a valid Oblivion file");
 
     getRecHeader();
 
@@ -252,7 +252,7 @@ void ESMReader::getSubHeader()
     getT(mCtx.leftSub);
 
     // Adjust number of record bytes left
-    mCtx.leftRec -= mCtx.leftSub + 4;
+    mCtx.leftRec -= mCtx.leftSub + sizeof(mCtx.leftSub);
 }
 
 void ESMReader::getSubHeaderIs(int size)
@@ -293,9 +293,11 @@ void ESMReader::getRecHeader(uint32_t &flags)
         fail("Previous record contains unread bytes");
 
     getUint(mCtx.leftRec);
-    getUint(flags);// This header entry is always zero
-    getUint(flags);
-    mCtx.leftFile -= 12;
+    getUint(flags);// Flags
+	uint32_t temp;
+	getUint(temp);// Record identifier
+	getUint(temp);// Version Control Info
+    mCtx.leftFile -= 4*4;
 
     // Check that sizes add up
     if (mCtx.leftFile < mCtx.leftRec)

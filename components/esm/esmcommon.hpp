@@ -61,7 +61,8 @@ typedef NAME_T<256> NAME256;
 struct ESM_Context
 {
   std::string filename;
-  uint32_t leftRec, leftSub;
+  uint32_t leftRec;
+  uint16_t leftSub;
   size_t leftFile;
   NAME recName, subName;
   // When working with multiple esX files, we will generate lists of all files that
