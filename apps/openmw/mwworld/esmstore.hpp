@@ -16,6 +16,8 @@ namespace MWWorld
 {
     class ESMStore
     {
+		Store<ESM::Group>			mGroups;
+
         Store<ESM::Activator>       mActivators;
         Store<ESM::Potion>          mPotions;
         Store<ESM::Apparatus>       mAppas;
@@ -100,6 +102,7 @@ namespace MWWorld
         ESMStore()
           : mDynamicCount(0)
         {
+			mStores[ESM::REC_GRUP] = &mGroups;
             mStores[ESM::REC_ACTI] = &mActivators;
             mStores[ESM::REC_ALCH] = &mPotions;
             mStores[ESM::REC_APPA] = &mAppas;
@@ -263,6 +266,11 @@ namespace MWWorld
         mIds[ptr->mId] = ESM::REC_NPC_;
         return ptr;
     }
+
+	template <>
+	inline const Store<ESM::Group> &ESMStore::get<ESM::Group>() const {
+		return mGroups;
+	}
 
     template <>
     inline const Store<ESM::Activator> &ESMStore::get<ESM::Activator>() const {

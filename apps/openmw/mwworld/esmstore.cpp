@@ -184,6 +184,7 @@ void ESMStore::setUp()
     {
         switch (type)
         {
+			case ESM::REC_GRUP:
             case ESM::REC_ALCH:
             case ESM::REC_ARMO:
             case ESM::REC_BOOK:

@@ -64,7 +64,7 @@ struct ESM_Context
   uint32_t leftRec;
   uint16_t leftSub;
   size_t leftFile;
-  NAME recName, subName;
+  NAME grupName, recName, subName;
   // When working with multiple esX files, we will generate lists of all files that
   //  actually contribute to a specific cell. Therefore, we need to store the index
   //  of the file belonging to this contest. See CellStore::(list/load)refs for details.

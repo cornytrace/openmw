@@ -2,6 +2,7 @@
 #define OPENMW_ESM_RECORDS_H
 
 #include "defs.hpp"
+#include "loadgrup.hpp"
 #include "loadacti.hpp"
 #include "loadalch.hpp"
 #include "loadappa.hpp"
